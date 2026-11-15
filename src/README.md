@@ -7,6 +7,21 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## 管理画面
+
+管理画面は `/admin` です。通常のユーザーはアクセスできず、管理者権限のあるアカウントが必要です。記事・カテゴリーの管理機能は未実装です。
+
+Docker環境で、リポジトリのルートから次のコマンドを実行してください。
+
+```sh
+docker compose exec php php artisan migrate --path=database/migrations/2026_11_15_000000_add_is_admin_to_users_table.php
+docker compose exec php php artisan admin:create
+```
+
+アカウント作成時は名前、メールアドレス、12文字以上のパスワードを対話形式で入力します。複数の管理者を追加する場合は、作成コマンドを人数分実行してください。既存アカウントの権限変更はこのコマンドでは行いません。
+
+公開側と管理側で同じ `public` ディレクトリを使えますが、Nginxの `/admin` の設定自体は認証ではありません。管理画面のファイルは `public/admin` に直接置かず、Laravelの認証・権限チェックを通してください。公開環境ではHTTPSを使用し、セキュアなセッションCookieを設定してください。
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

@@ -6,7 +6,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <title>Vue Test</title>
+    <title>ふわふわのブログ</title>
 </head>
 <body>
     <div id="app"></div>
