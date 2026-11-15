@@ -1,0 +1,167 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+:root {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    color: #273c32;
+    background: #f7f6ef;
+    font-synthesis: none;
+    scroll-behavior: smooth;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offset: 4px; }
+
+.site-header { background: #f7f6ef; }
+.header-inner { max-width: 1440px; height: 92px; margin: auto; padding: 0 6%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.brand-mark { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 50%; background: #344f3f; color: #f4f3e8; font: italic 700 31px/1 Georgia, serif; }
+.brand-mark span { color: #dda679; }
+.brand-copy { display: grid; gap: 4px; }
+.brand-copy strong { font-size: 15px; letter-spacing: .06em; }
+.brand-copy small { color: #8c998d; font: 700 8px/1 Arial, sans-serif; letter-spacing: .16em; }
+.main-nav { display: flex; align-items: center; gap: 36px; font-size: 12px; font-weight: 700; }
+.main-nav > a:not(.nav-start):hover { color: #bd8054; }
+.nav-start { padding: 13px 18px; border: 1px solid #c6cfc3; border-radius: 3px; }
+.nav-start span { margin-left: 18px; color: #bb8058; }
+.nav-start:hover { background: #e8eee6; }
+
+.hero { position: relative; max-width: 1440px; min-height: 574px; margin: auto; padding: 0 6% 52px; display: grid; grid-template-columns: 44% 56%; align-items: stretch; }
+.hero-copy { padding: 77px 30px 38px 0; }
+.eyebrow, .section-kicker { color: #a76f4c; font: 700 10px/1.4 Arial, sans-serif; letter-spacing: .17em; }
+.eyebrow { display: flex; align-items: center; gap: 11px; }
+.eyebrow-line { width: 29px; height: 1px; background: #b9825d; }
+.hero h1 { margin: 32px 0 24px; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: clamp(38px, 4vw, 60px); font-weight: 600; line-height: 1.65; letter-spacing: .08em; }
+.hero-description { color: #66766b; font-size: 14px; line-height: 2.3; letter-spacing: .06em; }
+.hero-link { display: inline-flex; gap: 45px; align-items: center; margin-top: 23px; padding: 16px 21px; background: #344f3f; color: white; font-size: 12px; font-weight: 700; }
+.hero-link:hover { background: #496955; }
+.hero-link span { font-size: 17px; color: #e1b186; }
+.hero-note { margin-top: 39px; color: #9aab9c; font-size: 10px; letter-spacing: .08em; }
+.hero-note span { margin-right: 7px; color: #bb8058; font-size: 17px; }
+.hero-art { position: relative; min-height: 510px; overflow: hidden; background: #a8bba7; }
+.landscape { display: block; width: 100%; height: 100%; position: absolute; inset: 0; }
+.art-caption { position: absolute; right: 0; bottom: 0; display: flex; align-items: center; gap: 23px; padding: 18px 22px; background: #f7f6ef; }
+.art-caption span:first-child { color: #bd8056; font: 700 9px Arial, sans-serif; letter-spacing: .14em; }
+.art-caption span:last-child { color: #6f7e71; font-size: 10px; }
+.hero-index { position: absolute; right: 6%; bottom: 19px; color: #a3ada0; font: 700 9px Arial, sans-serif; letter-spacing: .14em; }
+.hero-index span { color: #bb8058; }
+
+.marquee { min-height: 60px; padding: 0 4%; display: flex; align-items: center; justify-content: space-around; gap: 30px; overflow: hidden; background: #344f3f; color: #d7e0d2; white-space: nowrap; font: 700 10px Arial, sans-serif; letter-spacing: .17em; }
+.marquee i { color: #d7a278; font-size: 17px; font-style: normal; }
+.content-wrap { max-width: 1240px; margin: auto; padding: 105px 6% 100px; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+.section-kicker { margin: 0 0 15px; }
+.section-kicker span { margin-right: 14px; color: #a5b2a5; }
+.section-heading h2, .about h2 { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 31px; font-weight: 600; letter-spacing: .08em; }
+.heading-dot { color: #c58a60; }
+.section-description { margin: 13px 0 0; color: #88948a; font-size: 12px; letter-spacing: .05em; }
+.sample-note { color: #9a9f94; font-size: 10px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0 27px; }
+.filters button { cursor: pointer; border: 1px solid #dfe4da; border-radius: 2px; padding: 9px 16px; background: transparent; color: #758477; font-size: 11px; }
+.filters button:hover { border-color: #708978; }
+.filters button.active { border-color: #344f3f; background: #344f3f; color: #fff; }
+.post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+.post-card { min-width: 0; }
+.post-art { position: relative; height: 195px; overflow: hidden; background: #c4cfbb; }
+.post-art--garage { background: #c7b6a1; }
+.post-art--coffee { background: #d9c99e; }
+.post-art-label, .post-art-number { position: absolute; z-index: 3; color: #fffdf3; font: 700 9px Arial, sans-serif; letter-spacing: .17em; }
+.post-art-label { top: 19px; left: 20px; }
+.post-art-number { right: 18px; bottom: 16px; }
+.art-sun { position: absolute; top: 30px; right: 54px; width: 48px; height: 48px; border-radius: 50%; background: #eddbab; opacity: .9; }
+.art-hill { position: absolute; width: 135%; height: 150px; border-radius: 50% 50% 0 0; }
+.art-hill-back { left: -20%; bottom: -34px; transform: rotate(-8deg); background: #91a993; }
+.art-hill-front { right: -30%; bottom: -74px; transform: rotate(12deg); background: #5f806c; }
+.art-path { position: absolute; bottom: -36px; left: 43%; width: 58px; height: 125px; transform: rotate(32deg); border-radius: 50% 0 0 0; background: #ded4b9; }
+.post-art--garage .art-sun { background: #f0dfc0; }
+.post-art--garage .art-hill-back { background: #aa8d76; }
+.post-art--garage .art-hill-front { background: #785f50; }
+.post-art--garage .art-path { background: #d9c5a9; }
+.post-art--coffee .art-hill-back { background: #b5b28e; }
+.post-art--coffee .art-hill-front { background: #829077; }
+.post-art--coffee .art-path { background: #e1d3ac; }
+.post-meta { display: flex; gap: 13px; align-items: center; margin-top: 20px; color: #a4ada2; font-size: 10px; }
+.post-meta span:first-child { color: #b47d59; font-weight: 700; }
+.post-meta span + span::before { content: '—'; margin-right: 13px; color: #c7d0c3; }
+.post-card h3 { margin: 12px 0 9px; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 17px; line-height: 1.7; letter-spacing: .04em; }
+.post-card p { margin: 0; color: #879389; font-size: 12px; line-height: 2; }
+
+.about { margin-top: 110px; background: #e8eee5; }
+.about-inner { min-height: 245px; padding: 45px 6%; display: flex; align-items: center; gap: 8%; }
+.about-stamp { flex-shrink: 0; width: 126px; height: 126px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #9db09e; border-radius: 50%; color: #526e5a; }
+.about-stamp span { font: italic 52px/.9 Georgia, serif; }
+.about-stamp small { margin-top: 10px; font: 700 7px Arial, sans-serif; letter-spacing: .15em; }
+.about h2 { font-size: 25px; }
+.about-copy > p:not(.section-kicker) { margin: 15px 0 0; color: #77887a; font-size: 12px; line-height: 2; }
+.about-signature { margin-top: 15px; color: #ad7c59; font: italic 14px Georgia, serif; }
+.about-signature span { margin-left: 5px; }
+.about-side { margin-left: auto; color: #a4b8a6; font: 700 14px/1.55 Arial, sans-serif; letter-spacing: .16em; }
+.about-side span { display: block; margin-top: 15px; color: #bf8964; font-size: 21px; }
+.site-footer { padding: 45px 6% 22px; background: #293f33; color: #e2e8dd; }
+.footer-inner, .footer-bottom { max-width: 1090px; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.footer-inner strong { font-size: 16px; letter-spacing: .08em; }
+.footer-inner strong span { color: #d5a077; }
+.footer-inner p { margin: 8px 0 0; color: #9aafa0; font-size: 11px; }
+.footer-inner a { color: #dce5d8; font-size: 11px; }
+.footer-inner a span { margin-left: 16px; color: #d5a077; }
+.footer-bottom { margin-top: 38px; padding-top: 18px; border-top: 1px solid #496052; color: #8fa596; font: 700 9px Arial, sans-serif; letter-spacing: .12em; }
+
+@media (max-width: 800px) {
+    .header-inner { height: 76px; }
+    .main-nav { gap: 18px; }
+    .nav-start { display: none; }
+    .hero { grid-template-columns: 1fr 1fr; }
+    .hero-copy { padding-top: 50px; }
+    .hero h1 { font-size: clamp(32px, 4.5vw, 44px); }
+    .hero-art { min-height: 440px; }
+    .post-grid { gap: 16px; }
+    .post-art { height: 155px; }
+}
+
+@media (max-width: 600px) {
+    .header-inner { height: auto; min-height: 72px; padding: 14px 5%; flex-wrap: wrap; }
+    .brand-mark { width: 38px; height: 38px; font-size: 27px; }
+    .brand-copy strong { font-size: 13px; }
+    .main-nav { gap: 15px; font-size: 11px; }
+    .hero { padding: 0 5% 42px; grid-template-columns: 1fr; }
+    .hero-copy { padding: 45px 0 32px; }
+    .hero h1 { margin: 22px 0 15px; font-size: 38px; }
+    .hero-description { font-size: 13px; }
+    .hero-note { margin-top: 24px; }
+    .hero-art { min-height: 310px; }
+    .art-caption { padding: 13px; gap: 12px; }
+    .art-caption span:last-child { font-size: 9px; }
+    .hero-index { right: 5%; bottom: 15px; }
+    .marquee { justify-content: flex-start; min-height: 50px; }
+    .content-wrap { padding: 75px 5% 70px; }
+    .section-heading { align-items: start; flex-direction: column; gap: 13px; }
+    .section-heading h2 { font-size: 28px; }
+    .filters { margin-top: 25px; }
+    .filters button { padding: 9px 12px; }
+    .post-grid { grid-template-columns: 1fr; gap: 35px; }
+    .post-art { height: 210px; }
+    .about { margin-top: 75px; }
+    .about-inner { padding: 35px 7%; flex-wrap: wrap; gap: 25px; }
+    .about-stamp { width: 90px; height: 90px; }
+    .about-stamp span { font-size: 38px; }
+    .about-copy { flex: 1 1 210px; }
+    .about-side { display: none; }
+    .desktop-break { display: none; }
+    .site-footer { padding-left: 5%; padding-right: 5%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root { scroll-behavior: auto; }
+}

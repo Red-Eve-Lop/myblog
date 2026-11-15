@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+:root { font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; color: #293e32; background: #f7f6ef; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #c58a60; outline-offset: 3px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; letter-spacing: .05em; }
+.brand-mark { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 50%; background: #344f3f; color: #fff; font: italic 700 29px Georgia, serif; }
+.brand small { display: block; margin-top: 5px; color: #95a597; font: 700 9px Arial, sans-serif; letter-spacing: .15em; }
+.eyebrow { margin: 0 0 12px; color: #b17c58; font: 700 10px Arial, sans-serif; letter-spacing: .16em; }
+h1, h2, h3 { font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; letter-spacing: .06em; }
+.login-page { min-height: 100vh; display: grid; place-items: center; padding: 28px 18px; background: #e7eee5; }
+.login-card { width: min(100%, 440px); padding: 42px; background: #fffefa; border: 1px solid #dfe7dd; box-shadow: 0 18px 60px #293e3210; }
+.login-heading { margin: 48px 0 30px; }
+.login-heading h1 { margin: 0; font-size: 25px; }
+.login-heading > p:last-child { color: #849186; font-size: 12px; line-height: 1.8; }
+label { display: block; margin: 22px 0 8px; font-size: 12px; font-weight: 700; }
+input { width: 100%; padding: 13px; border: 1px solid #d6dfd4; border-radius: 2px; background: #fbfcf9; }
+.button { width: 100%; margin-top: 28px; padding: 15px 18px; border: 0; cursor: pointer; text-align: left; font-size: 13px; font-weight: 700; }
+.button-primary { background: #344f3f; color: white; }
+.button-primary:hover { background: #486953; }
+.button span { float: right; color: #dfb18a; }
+.back-link { display: inline-block; margin-top: 28px; color: #7d8d80; font-size: 12px; }
+.form-errors { padding: 12px 15px; border-left: 3px solid #b65f51; background: #fbefeb; color: #863d34; font-size: 12px; line-height: 1.7; }
+.form-errors p { margin: 0; }
+.dashboard-header { min-height: 86px; padding: 18px 6%; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid #e1e6dc; background: #fffefa; }
+.header-actions { display: flex; align-items: center; gap: 24px; font-size: 12px; }
+.logout { padding: 10px 14px; border: 1px solid #d5ded2; background: transparent; color: #435c4b; cursor: pointer; }
+.logout:hover { background: #edf2eb; }
+.dashboard-main { width: min(100% - 12%, 1050px); margin: 72px auto 100px; }
+.dashboard-main h1 { margin: 0; font-size: 32px; }
+.greeting { margin: 14px 0 36px; color: #849186; font-size: 13px; }
+.welcome-panel { min-height: 210px; padding: 38px 7%; display: flex; align-items: center; gap: 40px; background: #e7eee5; }
+.welcome-icon { width: 92px; height: 92px; flex-shrink: 0; display: grid; place-items: center; border: 1px solid #aebfad; border-radius: 50%; color: #6b8872; font-size: 36px; }
+.welcome-panel h2 { margin: 0; font-size: 23px; }
+.welcome-panel div > p:last-child { margin: 15px 0 0; color: #738678; font-size: 13px; line-height: 1.8; }
+.features { margin-top: 70px; }
+.section-header h2 { margin: 0; font-size: 22px; }
+.feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 25px; }
+.feature-card { padding: 27px; border: 1px solid #e2e8de; background: #fffefa; }
+.feature-number { color: #b7c5b6; font: 700 11px Arial, sans-serif; letter-spacing: .1em; }
+.feature-card h3 { margin: 18px 0 9px; font-size: 17px; }
+.feature-card p { color: #8a998c; font-size: 12px; line-height: 1.8; }
+.status { display: inline-block; margin-top: 12px; padding: 6px 10px; background: #eef2eb; color: #738675; font-size: 10px; }
+.dashboard-footer { padding: 25px 6%; border-top: 1px solid #e1e6dc; color: #99a89a; font-size: 10px; letter-spacing: .1em; }
+.dashboard-footer span { margin: 0 6px; }
+@media (max-width: 600px) {
+    .login-card { padding: 30px 24px; }
+    .dashboard-header { align-items: flex-start; flex-wrap: wrap; }
+    .header-actions { gap: 14px; }
+    .dashboard-main { margin-top: 48px; }
+    .welcome-panel { padding: 30px; align-items: flex-start; flex-direction: column; gap: 20px; }
+    .welcome-icon { width: 65px; height: 65px; font-size: 27px; }
+    .feature-grid { grid-template-columns: 1fr; }
+}
