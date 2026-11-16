@@ -1,7 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-const props = defineProps({ categories: { type: Array, required: true } });
+const props = defineProps({
+    categories: { type: Array, required: true },
+    publishedPosts: { type: Array, required: true },
+});
 const selectedCategory = ref(null);
 
 const posts = [
@@ -34,13 +37,15 @@ const posts = [
     },
 ];
 
-const postsWithCategories = computed(() => posts.map((post) => ({
+const samplePosts = computed(() => posts.map((post) => ({
     ...post,
-    category: props.categories.find((category) => category.sample_key === post.categoryKey),
+    categories: props.categories.filter((category) => category.sample_key === post.categoryKey),
+    sample: true,
 })));
+const allPosts = computed(() => [...props.publishedPosts, ...samplePosts.value]);
 const visiblePosts = computed(() => selectedCategory.value === null
-    ? postsWithCategories.value
-    : postsWithCategories.value.filter((post) => post.category?.id === selectedCategory.value));
+    ? allPosts.value
+    : allPosts.value.filter((post) => post.categories.some((category) => category.id === selectedCategory.value)));
 </script>
 
 <template>
@@ -127,7 +132,7 @@ const visiblePosts = computed(() => selectedCategory.value === null
                             <h2 id="stories-title">最近のこと<span class="heading-dot">.</span></h2>
                             <p class="section-description">走った記録も、日々のつぶやきも。</p>
                         </div>
-                        <span class="sample-note">掲載内容はサンプルです</span>
+                        <span class="sample-note">一部の記事はサンプルです</span>
                     </div>
 
                     <div class="filters" role="group" aria-label="記事のカテゴリー">
@@ -148,17 +153,20 @@ const visiblePosts = computed(() => selectedCategory.value === null
                     </div>
 
                     <div class="post-grid">
-                        <article v-for="post in visiblePosts" :key="post.id" class="post-card">
-                            <div class="post-art" :class="`post-art--${post.artwork}`" aria-hidden="true">
+                        <article v-for="post in visiblePosts" :key="`${post.sample ? 'sample' : 'post'}-${post.id}`" class="post-card">
+                            <a v-if="post.image" :href="post.url" class="post-art post-image-link">
+                                <img :src="post.image" alt="" class="post-image">
+                            </a>
+                            <div v-else class="post-art" :class="`post-art--${post.artwork ?? 'road'}`" aria-hidden="true">
                                 <span class="post-art-label">{{ post.label }}</span>
                                 <span class="art-sun"></span>
                                 <span class="art-hill art-hill-back"></span>
                                 <span class="art-hill art-hill-front"></span>
                                 <span class="art-path"></span>
-                                <span class="post-art-number">{{ post.number }} / 03</span>
+                                <span v-if="post.sample" class="post-art-number">{{ post.number }} / 03</span>
                             </div>
-                            <div class="post-meta"><span>{{ post.category?.name ?? '未分類' }}</span><span>サンプル記事</span></div>
-                            <h3>{{ post.title }}</h3>
+                            <div class="post-meta"><span>{{ post.categories.map((category) => category.name).join('・') || '未分類' }}</span><span>{{ post.sample ? 'サンプル記事' : post.date }}</span></div>
+                            <h3><a v-if="post.url" :href="post.url">{{ post.title }}</a><template v-else>{{ post.title }}</template></h3>
                             <p>{{ post.description }}</p>
                         </article>
                     </div>
