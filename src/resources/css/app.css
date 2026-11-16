@@ -123,6 +123,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
 .profile-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .profile-details .section-kicker { margin: 0 0 13px; }
 .profile-details h2 { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 28px; font-weight: 600; letter-spacing: .08em; }
+.profile-social-links { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.profile-social { display: inline-flex; align-items: center; gap: 10px; color: #526e5a; font-size: 12px; font-weight: 700; }
+.profile-social:hover { color: #a76f4c; }
+.profile-social-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 4px; background: #273c32; color: #fff; font-size: 18px; }
+.profile-social:hover .profile-social-icon { background: #496955; }
 .profile-details > p:not(.section-kicker) { max-width: 590px; margin: 17px 0 0; color: #718075; font-size: 13px; line-height: 2.2; }
 .profile-interests { margin-top: 25px; padding-top: 20px; border-top: 1px solid #d1dbd0; }
 .profile-interests h3 { margin: 0 0 12px; color: #a76f4c; font: 700 10px/1.4 Arial, sans-serif; letter-spacing: .16em; }

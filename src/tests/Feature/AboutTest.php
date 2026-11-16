@@ -26,6 +26,7 @@ class AboutTest extends TestCase
             ->assertSee('images/profile-avatar.jpg')
             ->assertSee('管理人のアカウント画像')
             ->assertSee('バイクとツーリング')
+            ->assertSee('href="https://x.com/C4URSzhA4J55075" target="_blank" rel="noopener noreferrer"', false)
             ->assertSee('https://embed.nicovideo.jp/watch/sm47028104');
 
         $this->get('/about')->assertSee('https://embed.nicovideo.jp/watch/sm47028104');
