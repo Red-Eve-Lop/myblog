@@ -39,6 +39,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid #a85870; outline-offs
 .nav-start:hover { background: #e8eee6; }
 
 .hero { position: relative; max-width: 1440px; min-height: 574px; margin: auto; padding: 0 6% 52px; display: grid; grid-template-columns: 44% 56%; align-items: stretch; }
+.hero-face-group { grid-column: 1 / -1; }
+.hero-face { width: min(100%, 650px); height: clamp(140px, 17vw, 230px); margin: 0 auto; overflow: hidden; mask-image: radial-gradient(ellipse at center, #000 35%, transparent 76%); }
+.hero-face img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .hero-copy { padding: 77px 30px 38px 0; }
 .eyebrow, .section-kicker { color: #a76f4c; font: 700 10px/1.4 Arial, sans-serif; letter-spacing: .17em; }
 .eyebrow { display: flex; align-items: center; gap: 11px; }
@@ -56,10 +59,10 @@ button:focus-visible, a:focus-visible { outline: 3px solid #a85870; outline-offs
 .hero-mascot img { display: block; width: 100%; height: 100%; object-fit: cover; border: 8px solid #fffaf5; border-radius: 50%; box-shadow: 0 12px 28px #577f6e45; }
 .hero-mascot-label { position: absolute; right: -14%; bottom: -5%; padding: 10px 14px; border-radius: 999px; background: #fffaf5; color: #658d7c; box-shadow: 0 4px 12px #577f6e24; white-space: nowrap; font: 700 9px Arial, sans-serif; letter-spacing: .1em; }
 .hero-mascot-label span { color: #d88da2; font-size: 14px; }
-.dragon-dialogue { position: absolute; z-index: 2; top: 12%; left: 49%; width: 40%; margin: 0; padding: 16px 18px; border: 2px solid #f1cdd4; border-radius: 22px; background: #fffaf5; color: #536e60; box-shadow: 0 5px 16px #577f6e24; font-size: 14px; font-weight: 700; line-height: 1.7; overflow-wrap: anywhere; }
-.dragon-dialogue::before, .dragon-dialogue::after { content: ''; position: absolute; top: 50%; width: 0; height: 0; transform: translateY(-50%); }
-.dragon-dialogue::before { left: -20px; border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-right: 20px solid #f1cdd4; }
-.dragon-dialogue::after { left: -16px; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-right: 18px solid #fffaf5; }
+.dragon-dialogue { position: relative; width: fit-content; min-width: 180px; max-width: min(85%, 360px); margin: 24px auto 8px; padding: 16px 27px; border-radius: 48% 52% 45% 55% / 55% 48% 52% 45%; background: #fff; color: #536e60; box-shadow: -9px 0 0 -2px #fff, 9px 0 0 -2px #fff, 0 -7px 0 -3px #fff, 0 7px 0 -3px #fff, 0 8px 20px #b88e9c2e; text-align: center; font-size: 14px; font-weight: 700; line-height: 1.7; overflow-wrap: anywhere; }
+.dragon-dialogue::before, .dragon-dialogue::after { content: ''; position: absolute; left: 50%; border-radius: 50%; background: #fff; box-shadow: 0 2px 5px #b88e9c30; transform: translateX(-50%); }
+.dragon-dialogue::before { top: -16px; width: 12px; height: 12px; }
+.dragon-dialogue::after { top: -27px; width: 7px; height: 7px; }
 .hero-sparkle { position: absolute; z-index: 1; color: #fff; text-shadow: 0 2px 6px #9dc6b4; }
 .hero-sparkle--one { top: -8%; right: -10%; font-size: 38px; }
 .hero-sparkle--two { bottom: 8%; left: -14%; font-size: 30px; }
@@ -194,7 +197,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #a85870; outline-offs
     .hero-note { margin-top: 24px; }
     .hero-art { min-height: 310px; }
     .hero-mascot { top: 28%; left: 6%; width: 40%; }
-    .dragon-dialogue { top: 15%; width: 47%; padding: 10px 12px; font-size: 12px; }
+    .dragon-dialogue { font-size: 13px; }
     .art-caption { padding: 13px; gap: 12px; }
     .art-caption span:last-child { font-size: 9px; }
     .hero-index { right: 5%; bottom: 15px; }

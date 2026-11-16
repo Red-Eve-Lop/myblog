@@ -54,6 +54,12 @@ const visiblePosts = computed(() => selectedCategory.value === null
 
         <main>
             <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-face-group">
+                    <div class="hero-face" aria-hidden="true">
+                        <img :src="'/images/dragon-face.jpg'" alt="">
+                    </div>
+                    <p v-if="dragonDialogues.length" class="dragon-dialogue"><span class="sr-only">ドラゴンの台詞：</span>{{ dragonDialogues[dialogueIndex] }}</p>
+                </div>
                 <div class="hero-copy">
                     <div class="eyebrow"><span class="eyebrow-line"></span> A LITTLE JOURNAL ON TWO WHEELS</div>
                     <h1 id="hero-title">走る日も、<br>走らない日も</h1>
@@ -106,7 +112,6 @@ const visiblePosts = computed(() => selectedCategory.value === null
                         <img :src="'/images/profile-avatar.jpg'" alt="">
                         <span class="hero-mascot-label">FUWAFUWA DRAGON <span>♡</span></span>
                     </div>
-                    <p v-if="dragonDialogues.length" class="dragon-dialogue"><span class="sr-only">ドラゴンの台詞：</span>{{ dragonDialogues[dialogueIndex] }}</p>
                     <div class="art-caption" aria-hidden="true"><span>THE OPEN ROAD</span><span>自分のペースで、どこまでも。</span></div>
                 </div>
                 <div class="hero-index" aria-hidden="true"><span>01 — 03</span>　RIDE / LIFE / JOURNAL</div>

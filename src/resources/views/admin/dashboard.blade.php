@@ -26,7 +26,7 @@
             <div class="welcome-icon" aria-hidden="true">✳</div>
             <div>
                 <p class="eyebrow">TAKE IT EASY</p>
-                <h2>ブログを育てる場所。</h2>
+                <h2>ブログを書くとこです</h2>
                 <p>ツーリングの記録や、日々のことを綴るための管理画面です。</p>
             </div>
         </section>
