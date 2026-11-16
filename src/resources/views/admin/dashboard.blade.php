@@ -26,7 +26,7 @@
             <div class="welcome-icon" aria-hidden="true">✳</div>
             <div>
                 <p class="eyebrow">TAKE IT EASY</p>
-                <h2>ブログを育てる場所。</h2>
+                <h2>ブログを書くとこです</h2>
                 <p>ツーリングの記録や、日々のことを綴るための管理画面です。</p>
             </div>
         </section>
@@ -35,6 +35,7 @@
             <div class="feature-grid">
                 <article class="feature-card"><span class="feature-number">01</span><h3>記事の管理</h3><p>記事の作成や編集ができます。</p><a class="status" href="{{ route('admin.posts.index') }}">記事を管理する →</a></article>
                 <article class="feature-card"><span class="feature-number">02</span><h3>カテゴリーの管理</h3><p>カテゴリーの追加や編集ができます。</p><a class="status" href="{{ route('admin.categories.index') }}">カテゴリーを管理する →</a></article>
+                <article class="feature-card"><span class="feature-number">03</span><h3>ドラゴンの台詞</h3><p>トップページに表示する台詞を管理できます。</p><a class="status" href="{{ route('admin.dragon-dialogues.index') }}">台詞を管理する →</a></article>
             </div>
         </section>
     </main>

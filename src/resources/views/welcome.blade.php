@@ -13,6 +13,7 @@
     <script>
         window.blogCategories = {{ Illuminate\Support\Js::from($categories) }};
         window.blogPosts = {{ Illuminate\Support\Js::from($posts) }};
+        window.dragonDialogues = {{ Illuminate\Support\Js::from($dialogues) }};
     </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\DragonDialogue;
 use App\Models\Post;
 use App\Support\PostContent;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ class PublicPostController extends Controller
         return view('welcome', [
             'categories' => Category::orderBy('id')->get(['id', 'name', 'sample_key']),
             'posts' => $posts,
+            'dialogues' => DragonDialogue::orderBy('id')->pluck('text'),
         ]);
     }
 
