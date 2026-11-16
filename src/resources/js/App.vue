@@ -43,34 +43,34 @@ const visiblePosts = computed(() => selectedCategory.value === null
             <section class="hero" aria-labelledby="hero-title">
                 <div class="hero-copy">
                     <div class="eyebrow"><span class="eyebrow-line"></span> A LITTLE JOURNAL ON TWO WHEELS</div>
-                    <h1 id="hero-title">走る日も、<br>走らない日も。</h1>
+                    <h1 id="hero-title">走る日も、<br>走らない日も</h1>
                     <p class="hero-description">
                         バイクで出かけた道のこと。<br>
                         なんでもない日々のこと。<br>
                         気の向くままに、ゆるりと綴ります。
                     </p>
                     <a class="hero-link" href="#stories">記事をのぞいてみる <span aria-hidden="true">↗</span></a>
-                    <div class="hero-note"><span>✳</span> のんびり、マイペースに。</div>
+                    <div class="hero-note"><span>✳</span> のんびり＆マイペース</div>
                 </div>
 
                 <div class="hero-art" aria-hidden="true">
                     <svg class="landscape" viewBox="0 0 760 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
-                                <stop offset="0" stop-color="#b9c9b9"/>
-                                <stop offset="1" stop-color="#e9ddc0"/>
+                                <stop offset="0" stop-color="#d6eae4"/>
+                                <stop offset="1" stop-color="#fff0df"/>
                             </linearGradient>
                             <linearGradient id="road" x1="0" x2="1" y1="0" y2="1">
-                                <stop stop-color="#b8b09b"/>
-                                <stop offset="1" stop-color="#e3d3b6"/>
+                                <stop stop-color="#ebd5c8"/>
+                                <stop offset="1" stop-color="#fff0dc"/>
                             </linearGradient>
                         </defs>
                         <rect width="760" height="620" fill="url(#sky)"/>
-                        <circle cx="566" cy="151" r="52" fill="#eacb8f" opacity=".9"/>
-                        <path d="M0 338 130 225 214 288 330 174 469 306 555 234 760 344V620H0Z" fill="#889d8c"/>
-                        <path d="M0 367 160 273 284 349 421 259 548 343 664 282 760 335V620H0Z" fill="#718a77"/>
-                        <path d="M0 405C113 369 231 371 347 390c142 23 272-3 413-40v270H0Z" fill="#526f5d"/>
-                        <path d="M0 461c169-53 291-48 402-20 142 36 263 13 358-20v199H0Z" fill="#405d4d"/>
+                        <circle cx="566" cy="151" r="52" fill="#fbe4a9" opacity=".9"/>
+                        <path d="M0 338 130 225 214 288 330 174 469 306 555 234 760 344V620H0Z" fill="#c6d9cd"/>
+                        <path d="M0 367 160 273 284 349 421 259 548 343 664 282 760 335V620H0Z" fill="#b3d2c1"/>
+                        <path d="M0 405C113 369 231 371 347 390c142 23 272-3 413-40v270H0Z" fill="#94bea9"/>
+                        <path d="M0 461c169-53 291-48 402-20 142 36 263 13 358-20v199H0Z" fill="#77a993"/>
                         <path d="M302 620c29-67 58-112 92-149 33-36 71-52 120-57-37 18-56 34-71 55-22 31-37 73-43 151Z" fill="url(#road)"/>
                         <path d="M355 620c12-38 24-66 37-89m14-21 7-10" fill="none" stroke="#f1e4c9" stroke-width="3" stroke-linecap="round" stroke-dasharray="27 22"/>
                         <g fill="#293f34">
@@ -87,6 +87,12 @@ const visiblePosts = computed(() => selectedCategory.value === null
                         <path d="M38 43h65M38 52h38" stroke="#f6f1e3" stroke-width="2" opacity=".65"/>
                         <text x="39" y="81" fill="#f6f1e3" font-size="12" font-family="sans-serif" letter-spacing="3">TAKE THE SCENIC ROUTE</text>
                     </svg>
+                    <div class="hero-mascot">
+                        <span class="hero-sparkle hero-sparkle--one">✦</span>
+                        <span class="hero-sparkle hero-sparkle--two">✧</span>
+                        <img :src="'/images/profile-avatar.jpg'" alt="">
+                        <span class="hero-mascot-label">FUWAFUWA DRAGON <span>♡</span></span>
+                    </div>
                     <div class="art-caption"><span>THE OPEN ROAD</span><span>自分のペースで、どこまでも。</span></div>
                 </div>
                 <div class="hero-index" aria-hidden="true"><span>01 — 03</span>　RIDE / LIFE / JOURNAL</div>
@@ -146,10 +152,10 @@ const visiblePosts = computed(() => selectedCategory.value === null
 
                 <aside id="about" class="about" aria-labelledby="about-title">
                     <div class="about-inner">
-                        <div class="about-stamp" aria-hidden="true"><span>f.</span><small>TAKE IT EASY</small></div>
+                        <div class="about-stamp" aria-hidden="true"><img :src="'/images/profile-avatar.jpg'" alt=""></div>
                         <div class="about-copy">
                             <p class="section-kicker"><span>02</span> ABOUT THIS BLOG</p>
-                            <h2 id="about-title">寄り道、大歓迎。</h2>
+                            <h2 id="about-title">ふわふわしています。いろいろ。</h2>
                             <p>バイクのこと、日々のこと。<br>好きなものや、そのとき思ったことを、<br class="desktop-break">気ままに書き留めていく場所です。</p>
                             <div class="about-signature">Thanks for stopping by <span>✳</span></div>
                         </div>
