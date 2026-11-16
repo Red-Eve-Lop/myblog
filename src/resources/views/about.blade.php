@@ -25,16 +25,20 @@
             <section class="profile-intro" aria-labelledby="profile-title">
                 <p class="section-kicker"><span>ABOUT THE AUTHOR</span></p>
                 <h1 id="profile-title">このブログを書いている人</h1>
-                <p>はじめまして。「ふわふわのブログ」を書いている管理人です。バイクで出かけた日のことも、いつもの暮らしのことも、気ままに綴っています。</p>
+                <p>ふわふわドラゴンです。「ふわふわのブログ」を書いている管理人です。バイクで出かけた日のことも、いつもの暮らしのことも、気ままに綴っています。</p>
             </section>
 
             <section class="profile-card" aria-labelledby="profile-name">
-                <div class="profile-emblem" aria-hidden="true">f<span>.</span></div>
+                <div class="profile-avatar">
+                    <img src="{{ asset('images/profile-avatar.jpg') }}" alt="管理人のアカウント画像">
+                </div>
                 <div class="profile-details">
                     <p class="section-kicker">A LITTLE ABOUT ME</p>
                     <h2 id="profile-name">ふわふわドラゴン</h2>
                     <p>ふわふわのブログの管理人です。</p>
-                    <p>遠回りして見つけた景色や、何気ない毎日の小さな発見が好きです。ここでは、ツーリングの記録や日々のことを、自分のペースで残していきます。</p>
+                    <p>ツーリングの記録や日々のことを、自分のペースで残していきます。</p>
+                    <p>ニコニコ動画に、モトブログ「バイク雪さん」シリーズを投稿しています。</p>
+                    <iframe title="ニコニコ動画" width="50%" height="200" src="https://embed.nicovideo.jp/watch/{{ $latestVideoId }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div class="profile-interests">
                         <h3>このブログに書いていること</h3>
                         <ul>
