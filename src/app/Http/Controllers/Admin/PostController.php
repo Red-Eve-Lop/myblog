@@ -54,7 +54,7 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:10000'],
-            'status' => ['required', Rule::in(['draft', 'published'])],
+            'status' => ['required', Rule::in(['draft', 'private', 'published'])],
             'category_ids' => ['nullable', 'array'],
             'category_ids.*' => ['integer', 'distinct', Rule::exists('categories', 'id')],
             'featured_image_id' => ['nullable', 'uuid'],

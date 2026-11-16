@@ -7,35 +7,7 @@ const props = defineProps({
 });
 const selectedCategory = ref(null);
 
-const posts = [
-    {
-        id: 1,
-        categoryKey: 'touring',
-        label: 'TOURING',
-        number: '01',
-        title: 'いつもの道を、少し遠くまで。',
-        description: '行き先を決めない日も、きっといい一日。風に誘われて走る、小さな旅の記録。',
-        artwork: 'road',
-    },
-    {
-        id: 2,
-        categoryKey: 'motorcycle',
-        label: 'MOTORCYCLE',
-        number: '02',
-        title: '相棒と過ごす、なんでもない時間。',
-        description: '乗る日も、乗らない日も。バイクのある暮らしのあれこれを。',
-        artwork: 'garage',
-    },
-    {
-        id: 3,
-        categoryKey: 'daily',
-        label: 'DAILY LIFE',
-        number: '03',
-        title: 'コーヒーを飲んで、ひとやすみ。',
-        description: '慌ただしい毎日のすきまに見つけた、ささやかな楽しみ。',
-        artwork: 'coffee',
-    },
-];
+const posts = [];
 
 const samplePosts = computed(() => posts.map((post) => ({
     ...post,
