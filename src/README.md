@@ -9,7 +9,7 @@
 
 ## 管理画面
 
-管理画面は `/admin` です。通常のユーザーはアクセスできず、管理者権限のあるアカウントが必要です。記事・カテゴリーの管理機能は未実装です。
+管理画面は `/admin` です。通常のユーザーはアクセスできず、管理者権限のあるアカウントが必要です。
 
 Docker環境で、リポジトリのルートから次のコマンドを実行してください。
 
@@ -43,6 +43,26 @@ docker compose exec php php artisan db:seed --class=CategorySeeder
 ```
 
 シーダーはサンプル記事に対応する3カテゴリーを登録します。同名のカテゴリーが既にあれば再利用し、再実行しても名前を上書きしません。`sample_key` はサンプル記事との対応を維持するための識別子です。管理画面の「カテゴリーを管理する」から追加・編集できます。記事やサンプル記事に使われているカテゴリーは削除できません。
+
+## 記事の投稿
+
+依存パッケージのインストールとマイグレーションを実行してください。
+
+```sh
+docker compose exec php composer install
+docker compose exec node npm ci
+docker compose exec php php artisan migrate
+docker compose exec php mkdir -p storage/app/private/post-images
+docker compose exec php chgrp www-data storage/app/private/post-images
+docker compose exec php chmod g+rwx storage/app/private/post-images
+docker compose exec node npm run build
+```
+
+管理画面の「記事を管理する」から、記事の作成・編集、複数カテゴリーの選択、下書き保存と公開ができます。公開中の記事を「下書きで保存」すると非公開になります。本文とアイキャッチにJPEG・PNG・GIF・WebP画像（1枚2MB以下）を使えます。
+
+画像は `storage/app/private/post-images` に保存され、公開記事に紐付いているものだけが外部に配信されます。下書きや未保存の画像は管理者のみ閲覧できます。記事から取り外した画像も非公開になりますが、ファイルは自動削除されません。既存の記事データはマイグレーション後、下書きとして扱います。
+
+Nginxの設定を変更した場合はコンテナに反映し、再読み込みしてください。別のWebサーバーやPHP設定を使う場合も、画像を2MBまで受け付けられるようリクエストサイズを設定してください。
 
 公開側と管理側で同じ `public` ディレクトリを使えますが、Nginxの `/admin` の設定自体は認証ではありません。管理画面のファイルは `public/admin` に直接置かず、Laravelの認証・権限チェックを通してください。公開環境ではHTTPSを使用し、セキュアなセッションCookieを設定してください。
 

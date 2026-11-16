@@ -10,6 +10,9 @@
 </head>
 <body>
     <div id="app"></div>
-    <script>window.blogCategories = {{ Illuminate\Support\Js::from($categories) }};</script>
+    <script>
+        window.blogCategories = {{ Illuminate\Support\Js::from($categories) }};
+        window.blogPosts = {{ Illuminate\Support\Js::from($posts) }};
+    </script>
 </body>
 </html>
