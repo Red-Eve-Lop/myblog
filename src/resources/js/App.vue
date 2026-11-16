@@ -1,11 +1,24 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps({
     categories: { type: Array, required: true },
     publishedPosts: { type: Array, required: true },
+    dragonDialogues: { type: Array, required: true },
 });
 const selectedCategory = ref(null);
+const dialogueIndex = ref(0);
+let dialogueTimer;
+
+onMounted(() => {
+    if (props.dragonDialogues.length > 1) {
+        dialogueTimer = setInterval(() => {
+            dialogueIndex.value = (dialogueIndex.value + 1) % props.dragonDialogues.length;
+        }, 8000);
+    }
+});
+
+onUnmounted(() => clearInterval(dialogueTimer));
 
 const posts = [];
 
@@ -53,8 +66,8 @@ const visiblePosts = computed(() => selectedCategory.value === null
                     <div class="hero-note"><span>✳</span> のんびり＆マイペース</div>
                 </div>
 
-                <div class="hero-art" aria-hidden="true">
-                    <svg class="landscape" viewBox="0 0 760 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <div class="hero-art">
+                    <svg class="landscape" aria-hidden="true" viewBox="0 0 760 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
                                 <stop offset="0" stop-color="#d6eae4"/>
@@ -87,13 +100,14 @@ const visiblePosts = computed(() => selectedCategory.value === null
                         <path d="M38 43h65M38 52h38" stroke="#f6f1e3" stroke-width="2" opacity=".65"/>
                         <text x="39" y="81" fill="#f6f1e3" font-size="12" font-family="sans-serif" letter-spacing="3">TAKE THE SCENIC ROUTE</text>
                     </svg>
-                    <div class="hero-mascot">
+                    <div class="hero-mascot" aria-hidden="true">
                         <span class="hero-sparkle hero-sparkle--one">✦</span>
                         <span class="hero-sparkle hero-sparkle--two">✧</span>
                         <img :src="'/images/profile-avatar.jpg'" alt="">
                         <span class="hero-mascot-label">FUWAFUWA DRAGON <span>♡</span></span>
                     </div>
-                    <div class="art-caption"><span>THE OPEN ROAD</span><span>自分のペースで、どこまでも。</span></div>
+                    <p v-if="dragonDialogues.length" class="dragon-dialogue"><span class="sr-only">ドラゴンの台詞：</span>{{ dragonDialogues[dialogueIndex] }}</p>
+                    <div class="art-caption" aria-hidden="true"><span>THE OPEN ROAD</span><span>自分のペースで、どこまでも。</span></div>
                 </div>
                 <div class="hero-index" aria-hidden="true"><span>01 — 03</span>　RIDE / LIFE / JOURNAL</div>
             </section>

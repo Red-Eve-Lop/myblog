@@ -66,6 +66,10 @@ Nginxの設定を変更した場合はコンテナに反映し、再読み込み
 
 公開側と管理側で同じ `public` ディレクトリを使えますが、Nginxの `/admin` の設定自体は認証ではありません。管理画面のファイルは `public/admin` に直接置かず、Laravelの認証・権限チェックを通してください。公開環境ではHTTPSを使用し、セキュアなセッションCookieを設定してください。
 
+## ドラゴンの台詞
+
+`docker compose exec php php artisan migrate` で台詞用テーブルと初期台詞を作成します。管理画面の「台詞を管理する」から40文字以内の台詞を追加・編集・削除できます。トップページには登録順に表示し、複数ある場合は8秒ごとに切り替わります。すべて削除すると吹き出しは表示されません。
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

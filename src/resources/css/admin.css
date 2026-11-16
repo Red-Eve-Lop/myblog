@@ -55,6 +55,8 @@ input { width: 100%; padding: 13px; border: 1px solid #d6dfd4; border-radius: 2p
 .category-submit { width: auto; margin-top: 16px; }
 .category-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid #e2e8de; font-size: 14px; }
 .category-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.dialogue-text { min-width: 0; overflow-wrap: anywhere; }
+.category-actions { flex-shrink: 0; }
 .category-actions { display: flex; align-items: center; gap: 18px; font-size: 12px; }
 .category-actions a { color: #435c4b; text-decoration: underline; }
 .category-delete { padding: 0; border: 0; background: transparent; color: #a04c3f; cursor: pointer; text-decoration: underline; }

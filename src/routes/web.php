@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DragonDialogueController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\PostImageController as AdminPostImageController;
 use App\Http\Controllers\PostImageController;
@@ -28,6 +29,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
         Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
         Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+        Route::get('/dragon-dialogues', [DragonDialogueController::class, 'index'])->name('admin.dragon-dialogues.index');
+        Route::post('/dragon-dialogues', [DragonDialogueController::class, 'store'])->name('admin.dragon-dialogues.store');
+        Route::get('/dragon-dialogues/{dragonDialogue}/edit', [DragonDialogueController::class, 'edit'])->name('admin.dragon-dialogues.edit');
+        Route::put('/dragon-dialogues/{dragonDialogue}', [DragonDialogueController::class, 'update'])->name('admin.dragon-dialogues.update');
+        Route::delete('/dragon-dialogues/{dragonDialogue}', [DragonDialogueController::class, 'destroy'])->name('admin.dragon-dialogues.destroy');
         Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
         Route::get('/posts/create', [AdminPostController::class, 'create'])->name('admin.posts.create');
         Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
