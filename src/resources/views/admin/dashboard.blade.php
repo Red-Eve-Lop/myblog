@@ -34,7 +34,7 @@
             <div class="section-header"><div><p class="eyebrow">COMING SOON</p><h2 id="features-title">これからできること</h2></div></div>
             <div class="feature-grid">
                 <article class="feature-card"><span class="feature-number">01</span><h3>記事の管理</h3><p>記事の作成や編集に対応予定です。</p><span class="status">準備中</span></article>
-                <article class="feature-card"><span class="feature-number">02</span><h3>カテゴリーの管理</h3><p>記事のカテゴリー管理に対応予定です。</p><span class="status">準備中</span></article>
+                <article class="feature-card"><span class="feature-number">02</span><h3>カテゴリーの管理</h3><p>カテゴリーの追加や編集ができます。</p><a class="status" href="{{ route('admin.categories.index') }}">カテゴリーを管理する →</a></article>
             </div>
         </section>
     </main>

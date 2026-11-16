@@ -1,13 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-const categories = ['すべて', 'ツーリング', 'バイクのこと', '日々のこと'];
-const selectedCategory = ref('すべて');
+const props = defineProps({ categories: { type: Array, required: true } });
+const selectedCategory = ref(null);
 
 const posts = [
     {
         id: 1,
-        category: 'ツーリング',
+        categoryKey: 'touring',
         label: 'TOURING',
         number: '01',
         title: 'いつもの道を、少し遠くまで。',
@@ -16,7 +16,7 @@ const posts = [
     },
     {
         id: 2,
-        category: 'バイクのこと',
+        categoryKey: 'motorcycle',
         label: 'MOTORCYCLE',
         number: '02',
         title: '相棒と過ごす、なんでもない時間。',
@@ -25,7 +25,7 @@ const posts = [
     },
     {
         id: 3,
-        category: '日々のこと',
+        categoryKey: 'daily',
         label: 'DAILY LIFE',
         number: '03',
         title: 'コーヒーを飲んで、ひとやすみ。',
@@ -34,9 +34,13 @@ const posts = [
     },
 ];
 
-const visiblePosts = computed(() => selectedCategory.value === 'すべて'
-    ? posts
-    : posts.filter((post) => post.category === selectedCategory.value));
+const postsWithCategories = computed(() => posts.map((post) => ({
+    ...post,
+    category: props.categories.find((category) => category.sample_key === post.categoryKey),
+})));
+const visiblePosts = computed(() => selectedCategory.value === null
+    ? postsWithCategories.value
+    : postsWithCategories.value.filter((post) => post.category?.id === selectedCategory.value));
 </script>
 
 <template>
@@ -128,13 +132,19 @@ const visiblePosts = computed(() => selectedCategory.value === 'すべて'
 
                     <div class="filters" role="group" aria-label="記事のカテゴリー">
                         <button
-                            v-for="category in categories"
-                            :key="category"
                             type="button"
-                            :class="{ active: selectedCategory === category }"
-                            :aria-pressed="selectedCategory === category"
-                            @click="selectedCategory = category"
-                        >{{ category }}</button>
+                            :class="{ active: selectedCategory === null }"
+                            :aria-pressed="selectedCategory === null"
+                            @click="selectedCategory = null"
+                        >すべて</button>
+                        <button
+                            v-for="category in categories"
+                            :key="category.id"
+                            type="button"
+                            :class="{ active: selectedCategory === category.id }"
+                            :aria-pressed="selectedCategory === category.id"
+                            @click="selectedCategory = category.id"
+                        >{{ category.name }}</button>
                     </div>
 
                     <div class="post-grid">
@@ -147,11 +157,12 @@ const visiblePosts = computed(() => selectedCategory.value === 'すべて'
                                 <span class="art-path"></span>
                                 <span class="post-art-number">{{ post.number }} / 03</span>
                             </div>
-                            <div class="post-meta"><span>{{ post.category }}</span><span>サンプル記事</span></div>
+                            <div class="post-meta"><span>{{ post.category?.name ?? '未分類' }}</span><span>サンプル記事</span></div>
                             <h3>{{ post.title }}</h3>
                             <p>{{ post.description }}</p>
                         </article>
                     </div>
+                    <p v-if="visiblePosts.length === 0" class="section-description">このカテゴリーの記事はまだありません。</p>
                 </section>
 
                 <aside id="about" class="about" aria-labelledby="about-title">

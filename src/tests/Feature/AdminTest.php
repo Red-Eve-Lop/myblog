@@ -3,8 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Closure;
+use Database\Seeders\AdminSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class AdminTest extends TestCase
@@ -91,5 +94,84 @@ class AdminTest extends TestCase
             ->assertFailed();
 
         $this->assertDatabaseMissing('users', ['email' => 'admin@example.com']);
+    }
+
+    public function test_admin_seeder_creates_a_user_who_can_log_in(): void
+    {
+        $this->withAdminSeederEnvironment([
+            'ADMIN_NAME' => 'Seed Admin',
+            'ADMIN_EMAIL' => 'seed-admin@example.com',
+            'ADMIN_PASSWORD' => 'long-password-123',
+        ], function () {
+            $this->artisan('db:seed', ['--class' => AdminSeeder::class])->assertSuccessful();
+
+            $admin = User::where('email', 'seed-admin@example.com')->firstOrFail();
+            $this->assertTrue($admin->is_admin);
+            $this->assertTrue(Hash::check('long-password-123', $admin->password));
+            $this->post('/admin/login', [
+                'email' => $admin->email,
+                'password' => 'long-password-123',
+            ])->assertRedirect('/admin');
+            $this->get('/admin')->assertOk();
+        });
+    }
+
+    public function test_admin_seeder_rejects_missing_or_invalid_values(): void
+    {
+        $this->withAdminSeederEnvironment([
+            'ADMIN_NAME' => null,
+            'ADMIN_EMAIL' => 'seed-admin@example.com',
+            'ADMIN_PASSWORD' => 'short',
+        ], function () {
+            try {
+                $this->seed(AdminSeeder::class);
+                $this->fail('Invalid administrator data was accepted.');
+            } catch (ValidationException $exception) {
+                $this->assertArrayHasKey('name', $exception->errors());
+                $this->assertArrayHasKey('password', $exception->errors());
+            }
+
+            $this->assertDatabaseMissing('users', ['email' => 'seed-admin@example.com']);
+        });
+    }
+
+    public function test_admin_seeder_does_not_change_an_existing_user(): void
+    {
+        $user = User::factory()->create(['email' => 'seed-admin@example.com']);
+
+        $this->withAdminSeederEnvironment([
+            'ADMIN_NAME' => 'Seed Admin',
+            'ADMIN_EMAIL' => $user->email,
+            'ADMIN_PASSWORD' => 'long-password-123',
+        ], function () use ($user) {
+            try {
+                $this->seed(AdminSeeder::class);
+                $this->fail('An existing email address was accepted.');
+            } catch (ValidationException $exception) {
+                $this->assertArrayHasKey('email', $exception->errors());
+            }
+
+            $user->refresh();
+            $this->assertFalse($user->is_admin);
+            $this->assertFalse(Hash::check('long-password-123', $user->password));
+            $this->assertSame(1, User::where('email', $user->email)->count());
+        });
+    }
+
+    private function withAdminSeederEnvironment(array $values, Closure $callback): void
+    {
+        $previous = [];
+        foreach ($values as $key => $value) {
+            $previous[$key] = getenv($key);
+            putenv($value === null ? $key : "$key=$value");
+        }
+
+        try {
+            $callback();
+        } finally {
+            foreach ($previous as $key => $value) {
+                putenv($value === false ? $key : "$key=$value");
+            }
+        }
     }
 }

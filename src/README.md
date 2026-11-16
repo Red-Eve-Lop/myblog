@@ -20,6 +20,30 @@ docker compose exec php php artisan admin:create
 
 アカウント作成時は名前、メールアドレス、12文字以上のパスワードを対話形式で入力します。複数の管理者を追加する場合は、作成コマンドを人数分実行してください。既存アカウントの権限変更はこのコマンドでは行いません。
 
+シーダーで作成する場合は、マイグレーション適用後に次のコマンドを実行します。値はシェルで入力し、コンテナに環境変数として渡します。
+
+```sh
+read -r -p '名前: ' ADMIN_NAME
+read -r -p 'メールアドレス: ' ADMIN_EMAIL
+read -r -s -p 'パスワード（12文字以上）: ' ADMIN_PASSWORD; echo
+export ADMIN_NAME ADMIN_EMAIL ADMIN_PASSWORD
+docker compose exec -e ADMIN_NAME -e ADMIN_EMAIL -e ADMIN_PASSWORD php php artisan db:seed --class=AdminSeeder
+unset ADMIN_NAME ADMIN_EMAIL ADMIN_PASSWORD
+```
+
+シーダーは明示的に実行した場合のみ管理者を作成します。同じメールアドレスが既に存在する場合はエラーとなり、既存ユーザーは変更しません。
+
+## カテゴリー管理
+
+カテゴリーをDBで管理するには、リポジトリのルートから次を実行します。
+
+```sh
+docker compose exec php php artisan migrate
+docker compose exec php php artisan db:seed --class=CategorySeeder
+```
+
+シーダーはサンプル記事に対応する3カテゴリーを登録します。同名のカテゴリーが既にあれば再利用し、再実行しても名前を上書きしません。`sample_key` はサンプル記事との対応を維持するための識別子です。管理画面の「カテゴリーを管理する」から追加・編集できます。記事やサンプル記事に使われているカテゴリーは削除できません。
+
 公開側と管理側で同じ `public` ディレクトリを使えますが、Nginxの `/admin` の設定自体は認証ではありません。管理画面のファイルは `public/admin` に直接置かず、Laravelの認証・権限チェックを通してください。公開環境ではHTTPSを使用し、セキュアなセッションCookieを設定してください。
 
 ## About Laravel
