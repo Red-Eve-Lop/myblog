@@ -114,6 +114,25 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
 .article-content blockquote { margin: 24px 0; padding: 8px 20px; border-left: 3px solid #aebfad; color: #66766b; }
 .article-back { display: inline-block; margin-top: 50px; color: #527d65; }
 
+.profile-main { max-width: 1080px; margin: auto; padding: 76px 6% 110px; }
+.profile-intro { max-width: 690px; margin-bottom: 48px; }
+.profile-intro h1 { margin: 18px 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: clamp(32px, 5vw, 48px); font-weight: 600; line-height: 1.5; letter-spacing: .08em; }
+.profile-intro > p:last-child { color: #718075; font-size: 14px; line-height: 2.2; letter-spacing: .04em; }
+.profile-card { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: center; padding: 42px; background: #e8eee5; }
+.profile-emblem { width: 184px; height: 184px; display: grid; place-items: center; justify-self: center; border: 1px solid #9db09e; border-radius: 50%; color: #526e5a; font: italic 76px/.9 Georgia, serif; }
+.profile-emblem span { color: #bd8056; }
+.profile-details .section-kicker { margin: 0 0 13px; }
+.profile-details h2 { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 28px; font-weight: 600; letter-spacing: .08em; }
+.profile-details > p:not(.section-kicker) { max-width: 590px; margin: 17px 0 0; color: #718075; font-size: 13px; line-height: 2.2; }
+.profile-interests { margin-top: 25px; padding-top: 20px; border-top: 1px solid #d1dbd0; }
+.profile-interests h3 { margin: 0 0 12px; color: #a76f4c; font: 700 10px/1.4 Arial, sans-serif; letter-spacing: .16em; }
+.profile-interests ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.profile-interests li { padding: 8px 11px; border: 1px solid #ced9cd; color: #617364; font-size: 11px; }
+.profile-note { margin: 55px 0 0; text-align: center; }
+.profile-note h2 { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 23px; font-weight: 600; letter-spacing: .08em; }
+.profile-note p { margin: 13px 0 23px; color: #849186; font-size: 12px; line-height: 2; }
+.profile-note .hero-link { margin-top: 0; }
+
 .about { margin-top: 110px; background: #e8eee5; }
 .about-inner { min-height: 245px; padding: 45px 6%; display: flex; align-items: center; gap: 8%; }
 .about-stamp { flex-shrink: 0; width: 126px; height: 126px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #9db09e; border-radius: 50%; color: #526e5a; }
@@ -144,6 +163,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
     .hero-art { min-height: 440px; }
     .post-grid { gap: 16px; }
     .post-art { height: 155px; }
+    .profile-card { grid-template-columns: 170px 1fr; gap: 30px; padding: 32px; }
+    .profile-emblem { width: 150px; height: 150px; font-size: 64px; }
 }
 
 @media (max-width: 600px) {
@@ -162,6 +183,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
     .hero-index { right: 5%; bottom: 15px; }
     .marquee { justify-content: flex-start; min-height: 50px; }
     .content-wrap { padding: 75px 5% 70px; }
+    .profile-main { padding: 55px 5% 75px; }
+    .profile-intro { margin-bottom: 30px; }
+    .profile-intro > p:last-child { font-size: 13px; }
+    .profile-card { grid-template-columns: 1fr; gap: 26px; padding: 28px 22px; }
+    .profile-emblem { width: 118px; height: 118px; font-size: 52px; }
+    .profile-details h2 { font-size: 24px; }
+    .profile-note { margin-top: 40px; }
+    .profile-note h2 { font-size: 20px; }
     .section-heading { align-items: start; flex-direction: column; gap: 13px; }
     .section-heading h2 { font-size: 28px; }
     .filters { margin-top: 25px; }

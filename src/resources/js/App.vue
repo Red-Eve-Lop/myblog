@@ -33,7 +33,7 @@ const visiblePosts = computed(() => selectedCategory.value === null
                 </a>
                 <nav class="main-nav" aria-label="メインナビゲーション">
                     <a href="#stories">記事</a>
-                    <a href="#about">このブログについて</a>
+                    <a href="/about">管理人について</a>
                     <a class="nav-start" href="#stories">読みはじめる <span aria-hidden="true">↗</span></a>
                 </nav>
             </div>
