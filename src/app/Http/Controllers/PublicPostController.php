@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Support\PostContent;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -37,11 +39,18 @@ class PublicPostController extends Controller
         ]);
     }
 
-    public function show(Post $post, PostContent $content): View
+    public function show(Request $request, Post $post, PostContent $content): View|Response
     {
-        abort_unless($post->status === 'published', 404);
+        $isPrivate = $post->status === 'private';
+        abort_unless($post->status === 'published' || ($isPrivate && $request->user()?->can('access-admin')), 404);
         $post->load(['categories', 'featuredImage']);
 
-        return view('posts.show', ['post' => $post, 'content' => $content->clean($post->content ?? '')]);
+        $data = ['post' => $post, 'content' => $content->clean($post->content ?? '')];
+
+        if ($isPrivate) {
+            return response()->view('posts.show', $data)->header('Cache-Control', 'private, no-store');
+        }
+
+        return view('posts.show', $data);
     }
 }

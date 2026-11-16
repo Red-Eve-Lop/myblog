@@ -16,6 +16,10 @@
     <main class="dashboard-main post-editor-main">
         <p class="eyebrow">POSTS</p>
         <h1>記事{{ $post->exists ? '編集' : '作成' }}</h1>
+        @if ($post->exists && $post->status === 'private')
+            <p class="editor-help">現在の状態：非公開（管理者のみ閲覧できます）</p>
+            <a class="status" href="{{ route('posts.show', $post) }}">非公開記事を表示 →</a>
+        @endif
         @if (session('status'))
             <p class="form-success" role="status">{{ session('status') }}</p>
         @endif
@@ -71,9 +75,10 @@
                 <button type="button" id="remove-featured">画像を外す</button>
             </div>
             <p id="upload-error" class="form-errors" role="alert" hidden></p>
-            <p class="editor-help">「下書きで保存」は公開中の記事を非公開にします。公開中の記事の変更は「公開する」で反映されます。</p>
+            <p class="editor-help">下書き・非公開で保存すると、公開中の記事は一般に表示されなくなります。非公開の記事は管理者のみ閲覧できます。</p>
             <div class="post-save-actions">
                 <button class="button button-secondary" type="submit" name="status" value="draft" disabled>下書きで保存</button>
+                <button class="button button-secondary" type="submit" name="status" value="private" disabled>非公開で保存</button>
                 <button class="button button-primary" type="submit" name="status" value="published" disabled>公開する</button>
             </div>
         </form>

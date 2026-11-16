@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @if ($post->status === 'private')
+        <meta name="robots" content="noindex, nofollow">
+    @endif
     <title>{{ $post->title }} | ふわふわのブログ</title>
     @vite('resources/css/app.css')
 </head>
@@ -14,7 +17,10 @@
         </div>
     </header>
     <main class="article-main">
-        <p class="section-kicker">{{ $post->categories->pluck('name')->join('・') ?: '未分類' }}　／　{{ $post->published_at?->format('Y.m.d') }}</p>
+        @if ($post->status === 'private')
+            <p class="section-kicker">非公開（管理者のみ閲覧できます）　／　<a href="{{ route('admin.posts.edit', $post) }}">記事を編集</a></p>
+        @endif
+        <p class="section-kicker">{{ $post->categories->pluck('name')->join('・') ?: '未分類' }}@if ($post->published_at)　／　{{ $post->published_at->format('Y.m.d') }}@endif</p>
         <h1>{{ $post->title }}</h1>
         @if ($post->featuredImage)
             <img class="article-featured" src="{{ route('post-images.show', $post->featuredImage) }}" alt="">

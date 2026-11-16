@@ -20,7 +20,7 @@
             <h2>記事一覧</h2>
             @forelse ($posts as $post)
                 <div class="category-row">
-                    <span>{{ $post->title }} <small class="category-in-use">（{{ $post->status === 'published' ? '公開中' : '下書き' }}）</small></span>
+                    <span>{{ $post->title }} <small class="category-in-use">（{{ match ($post->status) { 'published' => '公開中', 'private' => '非公開', 'draft' => '下書き', default => '不明' } }}）</small></span>
                     <div class="category-actions"><a href="{{ route('admin.posts.edit', $post) }}">編集</a></div>
                 </div>
             @empty

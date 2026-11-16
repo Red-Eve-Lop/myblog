@@ -128,6 +128,62 @@ class PostTest extends TestCase
         $this->assertSame(0, Post::count());
     }
 
+    public function test_private_posts_and_their_images_are_visible_only_to_administrators(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $this->actingAs($admin);
+        $image = $this->postJson('/admin/post-images', ['image' => UploadedFile::fake()->image('private.png')])
+            ->assertCreated()->json();
+        $data = [
+            'title' => '限定記事',
+            'content' => '<p>非公開の本文</p><img src="'.$image['url'].'">',
+            'featured_image_id' => $image['id'],
+            'status' => 'private',
+        ];
+
+        $this->post('/admin/posts', $data)->assertRedirect();
+        $post = Post::where('title', '限定記事')->firstOrFail();
+        $this->assertSame('private', $post->status);
+        $this->get('/admin/posts')->assertSee('非公開');
+        $this->get("/admin/posts/{$post->id}/edit")->assertSee('非公開で保存')->assertSee('非公開記事を表示');
+        $response = $this->get("/posts/{$post->id}")->assertOk()
+            ->assertSee('非公開の本文')->assertSee('管理者のみ閲覧できます')->assertSee('noindex');
+        $this->assertStringContainsString('no-store', $response->headers->get('Cache-Control'));
+        $this->assertStringContainsString('private', $response->headers->get('Cache-Control'));
+        $this->get($image['url'])->assertOk();
+        $this->get('/')->assertViewHas('posts', fn ($posts) => $posts->isEmpty());
+
+        $this->actingAs(User::factory()->create(['is_admin' => true]));
+        $this->get("/posts/{$post->id}")->assertOk();
+        $this->get($image['url'])->assertOk();
+
+        $this->actingAs(User::factory()->create());
+        $this->get("/posts/{$post->id}")->assertNotFound();
+        $this->get($image['url'])->assertNotFound();
+        auth()->logout();
+        $this->get("/posts/{$post->id}")->assertNotFound();
+        $this->get($image['url'])->assertNotFound();
+
+        $this->actingAs($admin);
+        $this->put("/admin/posts/{$post->id}", [...$data, 'status' => 'published'])->assertRedirect();
+        auth()->logout();
+        $this->get("/posts/{$post->id}")->assertOk();
+        $this->get($image['url'])->assertOk();
+        $this->get('/')->assertViewHas('posts', fn ($posts) => $posts->contains('title', '限定記事'));
+
+        $this->actingAs($admin);
+        $this->put("/admin/posts/{$post->id}", $data)->assertRedirect();
+        $this->assertSame('private', $post->fresh()->status);
+        auth()->logout();
+        $this->get("/posts/{$post->id}")->assertNotFound();
+        $this->get($image['url'])->assertNotFound();
+        $this->get('/')->assertViewHas('posts', fn ($posts) => $posts->isEmpty());
+
+        $this->actingAs($admin);
+        $this->put("/admin/posts/{$post->id}", [...$data, 'status' => 'draft'])->assertRedirect();
+        $this->get("/posts/{$post->id}")->assertNotFound();
+    }
+
     public function test_removed_images_become_private_and_cannot_be_reused_by_another_post(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
