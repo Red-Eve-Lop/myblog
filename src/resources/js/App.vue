@@ -104,7 +104,6 @@ const visiblePosts = computed(() => selectedCategory.value === null
                             <h2 id="stories-title">最近のこと<span class="heading-dot">.</span></h2>
                             <p class="section-description">走った記録も、日々のつぶやきも。</p>
                         </div>
-                        <span class="sample-note">一部の記事はサンプルです</span>
                     </div>
 
                     <div class="filters" role="group" aria-label="記事のカテゴリー">
