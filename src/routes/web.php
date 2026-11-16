@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\PublicPostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicPostController::class, 'index']);
-Route::get('/about', fn () => view('about'))->name('about');
+Route::get('/about', AboutController::class)->name('about');
 Route::get('/posts/{post}', [PublicPostController::class, 'show'])->name('posts.show');
 Route::get('/post-images/{image}', [PostImageController::class, 'show'])->name('post-images.show');
 

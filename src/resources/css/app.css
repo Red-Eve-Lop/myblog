@@ -119,10 +119,15 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
 .profile-intro h1 { margin: 18px 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: clamp(32px, 5vw, 48px); font-weight: 600; line-height: 1.5; letter-spacing: .08em; }
 .profile-intro > p:last-child { color: #718075; font-size: 14px; line-height: 2.2; letter-spacing: .04em; }
 .profile-card { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: center; padding: 42px; background: #e8eee5; }
-.profile-emblem { width: 184px; height: 184px; display: grid; place-items: center; justify-self: center; border: 1px solid #9db09e; border-radius: 50%; color: #526e5a; font: italic 76px/.9 Georgia, serif; }
-.profile-emblem span { color: #bd8056; }
+.profile-avatar { width: 184px; aspect-ratio: 1; justify-self: center; overflow: hidden; border: 1px solid #9db09e; border-radius: 50%; background: #f7f6ef; }
+.profile-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .profile-details .section-kicker { margin: 0 0 13px; }
 .profile-details h2 { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 28px; font-weight: 600; letter-spacing: .08em; }
+.profile-social-links { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.profile-social { display: inline-flex; align-items: center; gap: 10px; color: #526e5a; font-size: 12px; font-weight: 700; }
+.profile-social:hover { color: #a76f4c; }
+.profile-social-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 4px; background: #273c32; color: #fff; font-size: 18px; }
+.profile-social:hover .profile-social-icon { background: #496955; }
 .profile-details > p:not(.section-kicker) { max-width: 590px; margin: 17px 0 0; color: #718075; font-size: 13px; line-height: 2.2; }
 .profile-interests { margin-top: 25px; padding-top: 20px; border-top: 1px solid #d1dbd0; }
 .profile-interests h3 { margin: 0 0 12px; color: #a76f4c; font: 700 10px/1.4 Arial, sans-serif; letter-spacing: .16em; }
@@ -164,7 +169,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
     .post-grid { gap: 16px; }
     .post-art { height: 155px; }
     .profile-card { grid-template-columns: 170px 1fr; gap: 30px; padding: 32px; }
-    .profile-emblem { width: 150px; height: 150px; font-size: 64px; }
+    .profile-avatar { width: 150px; }
 }
 
 @media (max-width: 600px) {
@@ -187,7 +192,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #c47e4c; outline-offs
     .profile-intro { margin-bottom: 30px; }
     .profile-intro > p:last-child { font-size: 13px; }
     .profile-card { grid-template-columns: 1fr; gap: 26px; padding: 28px 22px; }
-    .profile-emblem { width: 118px; height: 118px; font-size: 52px; }
+    .profile-avatar { width: 118px; }
     .profile-details h2 { font-size: 24px; }
     .profile-note { margin-top: 40px; }
     .profile-note h2 { font-size: 20px; }
