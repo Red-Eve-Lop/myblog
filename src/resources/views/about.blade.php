@@ -77,7 +77,7 @@
         <footer class="site-footer">
             <div class="footer-inner">
                 <div><strong>ふわふわのブログ<span>.</span></strong>
-                    <p>バイクと、日々のこと。</p>
+                    <p>バイクとか日々のことか</p>
                 </div>
                 <a href="{{ url('/') }}">ブログトップへ <span aria-hidden="true">↗</span></a>
             </div>

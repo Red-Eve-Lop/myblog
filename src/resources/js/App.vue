@@ -112,7 +112,7 @@ const visiblePosts = computed(() => selectedCategory.value === null
                         <img :src="'/images/profile-avatar.jpg'" alt="">
                         <span class="hero-mascot-label">FUWAFUWA DRAGON <span>♡</span></span>
                     </div>
-                    <div class="art-caption" aria-hidden="true"><span>THE OPEN ROAD</span><span>自分のペースで、どこまでも。</span></div>
+                    <div class="art-caption" aria-hidden="true"><span>THE OPEN ROAD</span><span>ゆるく書きます</span></div>
                 </div>
                 <div class="hero-index" aria-hidden="true"><span>01 — 03</span>　RIDE / LIFE / JOURNAL</div>
             </section>
@@ -186,7 +186,7 @@ const visiblePosts = computed(() => selectedCategory.value === null
 
         <footer class="site-footer">
             <div class="footer-inner">
-                <div><strong>ふわふわのブログ<span>.</span></strong><p>バイクと、日々のこと。</p></div>
+                <div><strong>ふわふわのブログ<span>.</span></strong><p>バイクとか日々のことか</p></div>
                 <a href="#top">ページの先頭へ <span aria-hidden="true">↑</span></a>
             </div>
             <div class="footer-bottom"><span>FREELY, AT YOUR OWN PACE.</span><span>ふわふわのブログ</span></div>
