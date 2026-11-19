@@ -22,6 +22,8 @@ class PostContent
 
     public function clean(string $content): string
     {
+        $content = preg_replace('~<p>\s*</p>~i', '<p><br></p>', $content);
+
         return $this->purifier->purify($content);
     }
 
