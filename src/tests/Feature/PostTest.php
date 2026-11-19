@@ -128,6 +128,24 @@ class PostTest extends TestCase
         $this->assertSame(0, Post::count());
     }
 
+    public function test_blank_paragraphs_are_preserved_when_saving_and_showing_a_post(): void
+    {
+        $this->actingAs(User::factory()->create(['is_admin' => true]));
+        $this->post('/admin/posts', [
+            'title' => '空行のある記事',
+            'content' => '<p>前の段落</p><p></p><p>後の段落</p>',
+            'status' => 'published',
+        ])->assertRedirect();
+
+        $post = Post::where('title', '空行のある記事')->firstOrFail();
+        $this->assertStringContainsString('<p><br /></p>', $post->content);
+
+        auth()->logout();
+        $this->get("/posts/{$post->id}")
+            ->assertOk()
+            ->assertSee('<p><br /></p>', false);
+    }
+
     public function test_private_posts_and_their_images_are_visible_only_to_administrators(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);
