@@ -95,7 +95,7 @@ class PostTest extends TestCase
         $this->assertNotNull($publishedAt);
         auth()->logout();
         $this->get('/')->assertViewHas('posts', fn ($posts) => $posts->contains('title', '旅の記事'));
-        $this->get("/posts/{$post->id}")->assertOk()->assertSee('見出し')->assertSee($bodyImage['url'])->assertDontSee('<script', false);
+        $this->get("/posts/{$post->id}")->assertOk()->assertSee('見出し')->assertSee($bodyImage['url'])->assertDontSee('alert(1)', false);
         $this->get($bodyImage['url'])->assertOk();
         $this->get($featured['url'])->assertOk();
 
@@ -126,6 +126,29 @@ class PostTest extends TestCase
         $this->postJson('/admin/post-images', ['image' => UploadedFile::fake()->image('large.png')->size(2100)])
             ->assertUnprocessable();
         $this->assertSame(0, Post::count());
+    }
+
+    public function test_only_published_posts_offer_x_sharing(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $post = Post::create([
+            'user_id' => $admin->id,
+            'title' => '旅 & "バイク"',
+            'content' => '<p>本文</p>',
+            'status' => 'published',
+        ]);
+
+        $response = $this->get("/posts/{$post->id}")->assertOk()->assertSee('Xでシェアする');
+        $document = new \DOMDocument;
+        @$document->loadHTML('<?xml encoding="UTF-8">'.$response->getContent());
+        $link = $document->getElementById('share-on-x');
+        $this->assertNotNull($link);
+        $this->assertSame($post->title, $link->getAttribute('data-title'));
+        $this->assertSame("/posts/{$post->id}", $link->getAttribute('data-path'));
+
+        $post->update(['status' => 'private']);
+        $this->actingAs($admin)->get("/posts/{$post->id}")
+            ->assertOk()->assertDontSee('Xでシェアする');
     }
 
     public function test_blank_paragraphs_are_preserved_when_saving_and_showing_a_post(): void

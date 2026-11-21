@@ -26,6 +26,18 @@
             <img class="article-featured" src="{{ route('post-images.show', $post->featuredImage) }}" alt="">
         @endif
         <article class="article-content">{!! $content !!}</article>
+        @if ($post->status === 'published')
+            <p class="article-share-wrap" hidden><a id="share-on-x" class="article-share" data-title="{{ $post->title }}" data-path="{{ route('posts.show', $post, false) }}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">𝕏</span> Xでシェアする</a></p>
+            <noscript><p>XでシェアするにはJavaScriptを有効にしてください。</p></noscript>
+            <script>
+                const shareLink = document.querySelector('#share-on-x');
+                const shareUrl = new URL('https://twitter.com/intent/tweet');
+                shareUrl.searchParams.set('text', shareLink.dataset.title);
+                shareUrl.searchParams.set('url', new URL(shareLink.dataset.path, window.location.origin).href);
+                shareLink.href = shareUrl.href;
+                shareLink.parentElement.hidden = false;
+            </script>
+        @endif
         <a class="article-back" href="{{ url('/#stories') }}">← 記事一覧へ</a>
     </main>
 </body>
