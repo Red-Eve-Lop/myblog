@@ -31,7 +31,7 @@
             </div>
         @endif
         <noscript><p class="form-errors">記事の編集にはJavaScriptを有効にしてください。</p></noscript>
-        <form id="post-form" class="category-panel" method="POST" action="{{ $post->exists ? route('admin.posts.update', $post) : route('admin.posts.store') }}" data-upload-url="{{ route('admin.post-images.store') }}">
+        <form id="post-form" class="category-panel" method="POST" action="{{ $post->exists ? route('admin.posts.update', $post) : route('admin.posts.store') }}" data-upload-url="{{ route('admin.post-images.store', [], false) }}">
             @csrf
             @if ($post->exists) @method('PUT') @endif
             <label for="title">タイトル</label>
