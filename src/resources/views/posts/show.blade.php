@@ -7,6 +7,25 @@
         <meta name="robots" content="noindex, nofollow">
     @endif
     <title>{{ $post->title }} | ふわふわのブログ</title>
+    @if ($post->status === 'published')
+        @php
+            $description = html_entity_decode(strip_tags($content), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $description = Illuminate\Support\Str::limit(preg_replace('/\s+/u', ' ', trim($description)), 100);
+            $imageUrl = $post->featuredImage
+                ? route('post-images.show', $post->featuredImage)
+                : asset('images/dragon-face.jpg');
+        @endphp
+        <meta property="og:type" content="article">
+        <meta property="og:site_name" content="ふわふわのブログ">
+        <meta property="og:title" content="{{ $post->title }}">
+        <meta property="og:description" content="{{ $description ?: $post->title }}">
+        <meta property="og:url" content="{{ route('posts.show', $post) }}">
+        <meta property="og:image" content="{{ $imageUrl }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $post->title }}">
+        <meta name="twitter:description" content="{{ $description ?: $post->title }}">
+        <meta name="twitter:image" content="{{ $imageUrl }}">
+    @endif
     @vite('resources/css/app.css')
 </head>
 <body>
