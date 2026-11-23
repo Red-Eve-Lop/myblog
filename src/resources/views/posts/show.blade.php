@@ -7,6 +7,25 @@
         <meta name="robots" content="noindex, nofollow">
     @endif
     <title>{{ $post->title }} | ふわふわのブログ</title>
+    @if ($post->status === 'published')
+        @php
+            $description = html_entity_decode(strip_tags($content), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $description = Illuminate\Support\Str::limit(preg_replace('/\s+/u', ' ', trim($description)), 100);
+            $imageUrl = $post->featuredImage
+                ? route('post-images.show', $post->featuredImage)
+                : asset('images/dragon-face.jpg');
+        @endphp
+        <meta property="og:type" content="article">
+        <meta property="og:site_name" content="ふわふわのブログ">
+        <meta property="og:title" content="{{ $post->title }}">
+        <meta property="og:description" content="{{ $description ?: $post->title }}">
+        <meta property="og:url" content="{{ route('posts.show', $post) }}">
+        <meta property="og:image" content="{{ $imageUrl }}">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $post->title }}">
+        <meta name="twitter:description" content="{{ $description ?: $post->title }}">
+        <meta name="twitter:image" content="{{ $imageUrl }}">
+    @endif
     @vite('resources/css/app.css')
 </head>
 <body>
@@ -26,6 +45,18 @@
             <img class="article-featured" src="{{ route('post-images.show', $post->featuredImage) }}" alt="">
         @endif
         <article class="article-content">{!! $content !!}</article>
+        @if ($post->status === 'published')
+            <p class="article-share-wrap" hidden><a id="share-on-x" class="article-share" data-title="{{ $post->title }}" data-path="{{ route('posts.show', $post, false) }}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">𝕏</span> Xでシェアする</a></p>
+            <noscript><p>XでシェアするにはJavaScriptを有効にしてください。</p></noscript>
+            <script>
+                const shareLink = document.querySelector('#share-on-x');
+                const shareUrl = new URL('https://twitter.com/intent/tweet');
+                shareUrl.searchParams.set('text', shareLink.dataset.title);
+                shareUrl.searchParams.set('url', new URL(shareLink.dataset.path, window.location.origin).href);
+                shareLink.href = shareUrl.href;
+                shareLink.parentElement.hidden = false;
+            </script>
+        @endif
         <a class="article-back" href="{{ url('/#stories') }}">← 記事一覧へ</a>
     </main>
 </body>
